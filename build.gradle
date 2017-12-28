@@ -39,6 +39,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 
 	compile("org.projectlombok:lombok")
+	compile("ma.glasnost.orika:orika-core:1.5.2")
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
