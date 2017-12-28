@@ -13,13 +13,12 @@ To run:
 
 
 To test:
-    - curl -v -d '{"title":"Mr", "forename":"Philippe"}' -H "Content-Type: application/json" -X POST http://localhost:8080/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
+    - curl -v -d '{"title":"Mr", "forename":"Philippe"}' -H "Content-Type: application/json" -X POST http://localhost:8171/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
     201 {"createdBy":"system","description":"some description"}
 
-    - curl -v -d '{"some":"djiberish"}' -H "Content-Type: application/json" -X POST http://localhost:8080/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
-    TODO Should not give 201
-    
+    - curl -v -d '{"some":"djiberish"}' -H "Content-Type: application/json" -X POST http://localhost:8171/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
+    400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20171228214230408","message":"Provided json fails validation."}}
 
-TODO: Logs not coming out?
+
 TODO: Add a unit test for the endpoint. Same for the service.
 TODO: Add CheckStyle

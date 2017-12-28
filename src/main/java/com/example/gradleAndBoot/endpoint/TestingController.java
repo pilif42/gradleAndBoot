@@ -4,6 +4,7 @@ import com.example.gradleAndBoot.domain.model.CreatedObject;
 import com.example.gradleAndBoot.domain.model.Request;
 import com.example.gradleAndBoot.domain.representation.CreatedObjectDTO;
 import com.example.gradleAndBoot.domain.representation.RequestDTO;
+import com.example.gradleAndBoot.error.InvalidRequestException;
 import com.example.gradleAndBoot.service.ProcessService;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
@@ -33,8 +34,11 @@ public class TestingController {
   @RequestMapping(value = "/{caseId}/request", method = RequestMethod.POST)
   public ResponseEntity<CreatedObjectDTO> testingPost(@PathVariable("caseId") final UUID caseId,
       @RequestBody @Valid final RequestDTO requestDTO,
-      BindingResult bindingResult) {
+      BindingResult bindingResult) throws InvalidRequestException {
     log.debug("Entering testingPost with caseId {} and requestDTO {}", caseId, requestDTO);
+    if (bindingResult.hasErrors()) {
+      throw new InvalidRequestException("Binding errors for testingPost: ", bindingResult);
+    }
 
     Request request = mapperFacade.map(requestDTO, Request.class);
     CreatedObject createdObject = processService.process(request);
