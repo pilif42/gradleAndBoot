@@ -20,5 +20,5 @@ To test:
     400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20171228214230408","message":"Provided json fails validation."}}
 
 
-TODO: Add a unit test for the endpoint. Same for the service.
+TODO: Add an integration test. (https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
 TODO: Add CheckStyle

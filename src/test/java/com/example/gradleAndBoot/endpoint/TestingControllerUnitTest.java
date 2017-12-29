@@ -8,6 +8,7 @@ import com.example.gradleAndBoot.error.RestExceptionHandler;
 import com.example.gradleAndBoot.service.ProcessService;
 import com.example.gradleAndBoot.utility.CustomObjectMapper;
 import ma.glasnost.orika.MapperFacade;
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import static com.example.gradleAndBoot.service.impl.ProcessServiceImpl.DESCRIPTION;
@@ -36,9 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestingControllerUnitTest {
 
   private static final UUID CASE_ID = UUID.fromString("7bc5d41b-0549-40b3-ba76-42f6d4cf3fd1");
-  // TODO Read it from file
-  private static final String GOODJSON = "{\"title\":\"Mr\",\"forename\":\"Philippe\"}";
-  private static final String INVALIDJSON = "{\"description\":\"a\",\"category\":\"BAD_CAT\",\"createdBy\":\"u\"}";
   private static final String METHOD_UNDER_TEST = "testingPost";
 
   @InjectMocks
@@ -79,7 +78,7 @@ public class TestingControllerUnitTest {
   @Test
   public void testingPostBadJson() throws Exception {
     ResultActions actions = mockMvc.perform(postJson(String.format("/testing/%s/request", CASE_ID),
-        INVALIDJSON));
+        getFileContent("com/example/gradleAndBoot/endpoint/testingPostBad.json")));
 
     actions.andExpect(status().isBadRequest());
     actions.andExpect(handler().handlerType(TestingController.class));
@@ -98,12 +97,26 @@ public class TestingControllerUnitTest {
     CreatedObject result = CreatedObject.builder().createdBy(SYSTEM).internalDescription(DESCRIPTION).build();
     when(processService.process(any(Request.class))).thenReturn(result);
 
-    ResultActions actions = mockMvc.perform(postJson(String.format("/testing/%s/request", CASE_ID), GOODJSON));
+    ResultActions actions = mockMvc.perform(postJson(String.format("/testing/%s/request", CASE_ID),
+        getFileContent("com/example/gradleAndBoot/endpoint/testingPostGood.json")));
 
     actions.andExpect(status().is2xxSuccessful());
     actions.andExpect(handler().handlerType(TestingController.class));
     actions.andExpect(handler().methodName(METHOD_UNDER_TEST));
     actions.andExpect(jsonPath("$.createdBy", is(SYSTEM)));
     actions.andExpect(jsonPath("$.description", is(DESCRIPTION)));
+  }
+
+  private String getFileContent(String fileName) {
+    String result = "";
+
+    ClassLoader classLoader = getClass().getClassLoader();
+    try {
+      result = IOUtils.toString(classLoader.getResourceAsStream(fileName));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return result;
   }
 }
