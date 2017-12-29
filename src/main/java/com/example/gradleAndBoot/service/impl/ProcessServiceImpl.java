@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProcessServiceImpl implements ProcessService {
 
-  private static final String DESCRIPTION = "some description";
-  private static final String SYSTEM = "system";
+  public static final String DESCRIPTION = "some description";
+  public static final String SYSTEM = "system";
 
   @Override
   public CreatedObject process(Request request) {
