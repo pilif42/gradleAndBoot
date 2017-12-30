@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="7.6.1">
+<file name="/Users/philippebrossier/code_perso/gradleAndBoot/src/test/java/com/example/gradleAndBoot/endpoint/TestingControllerIntegrationTest.java">
+<error line="33" column="31" severity="warning" message="&apos;=&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="43" column="1" severity="warning" message="File contains tab characters (this is the first instance)." source="com.puppycrawl.tools.checkstyle.checks.whitespace.FileTabCharacterCheck"/>
+<error line="49" column="9" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="51" severity="warning" message="Line is longer than 120 characters (found 127)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="55" severity="warning" message="Line is longer than 120 characters (found 131)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+</file>
+<file name="/Users/philippebrossier/code_perso/gradleAndBoot/src/test/java/com/example/gradleAndBoot/endpoint/TestingControllerUnitTest.java">
+<error line="40" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+<error line="71" severity="warning" message="Line is longer than 120 characters (found 122)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="132" column="3" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+</file>
+<file name="/Users/philippebrossier/code_perso/gradleAndBoot/src/test/java/com/example/gradleAndBoot/utility/CustomObjectMapper.java">
+</file>
+<file name="/Users/philippebrossier/code_perso/gradleAndBoot/src/test/java/com/example/gradleAndBoot/utility/FixtureHelper.java">
+</file>
+<file name="/Users/philippebrossier/code_perso/gradleAndBoot/src/test/java/com/example/gradleAndBoot/utility/MockMvcControllerAdviceHelper.java">
+<error line="26" column="46" severity="warning" message="&apos;exceptionHandlerClass&apos; hides a field." source="com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck"/>
+</file>
+<file name="/Users/philippebrossier/code_perso/gradleAndBoot/src/test/java/com/example/gradleAndBoot/utility/MvcHelper.java">
+</file>
+</checkstyle>
