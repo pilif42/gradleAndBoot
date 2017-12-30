@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.io.IOException;
 import java.util.UUID;
 
+import static com.example.gradleAndBoot.error.RestExceptionHandler.INVALID_JSON;
+import static com.example.gradleAndBoot.error.RestExceptionHandler.PROVIDED_JSON_INCORRECT;
 import static com.example.gradleAndBoot.service.impl.ProcessServiceImpl.DESCRIPTION;
 import static com.example.gradleAndBoot.service.impl.ProcessServiceImpl.SYSTEM;
 import static com.example.gradleAndBoot.utility.MockMvcControllerAdviceHelper.mockAdviceFor;
@@ -56,7 +58,7 @@ public class TestingControllerUnitTest {
    * @throws Exception exception thrown
    */
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     MockitoAnnotations.initMocks(this);
 
     this.mockMvc = MockMvcBuilders
@@ -72,24 +74,44 @@ public class TestingControllerUnitTest {
   }
 
   /**
-   * a test providing bad json
+   * a test providing random json, ie valid json but not conforming at all to RequestDTO
+   *
    * @throws Exception if the postJson fails
    */
   @Test
-  public void testingPostBadJson() throws Exception {
+  public void testingPostRandomJson() throws Exception {
     ResultActions actions = mockMvc.perform(postJson(String.format("/testing/%s/request", CASE_ID),
-        getFileContent("com/example/gradleAndBoot/endpoint/testingPostBad.json")));
+        getFileContent("com/example/gradleAndBoot/endpoint/testingPostRandom.json")));
 
     actions.andExpect(status().isBadRequest());
     actions.andExpect(handler().handlerType(TestingController.class));
     actions.andExpect(handler().methodName(METHOD_UNDER_TEST));
     actions.andExpect(jsonPath("$.error.code", is(CTPException.Fault.VALIDATION_FAILED.name())));
-    actions.andExpect(jsonPath("$.error.message", isA(String.class)));
+    actions.andExpect(jsonPath("$.error.message", is(PROVIDED_JSON_INCORRECT)));
+    actions.andExpect(jsonPath("$.error.timestamp", isA(String.class)));
+  }
+
+  /**
+   * a test providing json that fails constraint @NotEmpty on forename in RequestDTO
+   *
+   * @throws Exception if the postJson fails
+   */
+  @Test
+  public void testingPostFailConstraintJson() throws Exception {
+    ResultActions actions = mockMvc.perform(postJson(String.format("/testing/%s/request", CASE_ID),
+        getFileContent("com/example/gradleAndBoot/endpoint/testingPostFailConstraint.json")));
+
+    actions.andExpect(status().isBadRequest());
+    actions.andExpect(handler().handlerType(TestingController.class));
+    actions.andExpect(handler().methodName(METHOD_UNDER_TEST));
+    actions.andExpect(jsonPath("$.error.code", is(CTPException.Fault.VALIDATION_FAILED.name())));
+    actions.andExpect(jsonPath("$.error.message", is(INVALID_JSON)));
     actions.andExpect(jsonPath("$.error.timestamp", isA(String.class)));
   }
 
   /**
    * a test providing good json
+   *
    * @throws Exception if the postJson fails
    */
   @Test

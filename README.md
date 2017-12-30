@@ -22,7 +22,9 @@ To test:
     - curl -v -d '{"some":"djiberish"}' -H "Content-Type: application/json" -X POST http://localhost:8171/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
     400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20171228214230408","message":"Provided json fails validation."}}
 
+    - curl -v -d '{"title":"Mr", "forename":""}' -H "Content-Type: application/json" -X POST http://localhost:8171/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
+     400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20171230210612001","message":"Provided json fails validation."}}
 
-TODO: Add an integration test. (https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
+
 TODO: Dockerize the app
 TODO: Add CheckStyle

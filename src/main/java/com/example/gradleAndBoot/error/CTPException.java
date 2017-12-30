@@ -1,6 +1,5 @@
 package com.example.gradleAndBoot.error;
 
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -54,6 +53,13 @@ public class CTPException extends Exception {
 
   private Fault fault;
   private long timestamp = System.currentTimeMillis();
+
+  /**
+   * Default Constructor
+   */
+  public CTPException() {
+    this(Fault.SYSTEM_ERROR, UNDEFINED_MSG, (Object[]) null);
+  }
 
   /**
    * Constructor

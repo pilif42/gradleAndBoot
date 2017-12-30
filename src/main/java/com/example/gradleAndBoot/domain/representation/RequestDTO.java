@@ -4,8 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +13,6 @@ public class RequestDTO {
 
   private String title;
 
-  @NotNull
+  @NotEmpty
   private String forename;
 }

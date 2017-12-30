@@ -4,7 +4,6 @@ import com.example.gradleAndBoot.domain.model.CreatedObject;
 import com.example.gradleAndBoot.domain.model.Request;
 import com.example.gradleAndBoot.domain.representation.CreatedObjectDTO;
 import com.example.gradleAndBoot.domain.representation.RequestDTO;
-import com.example.gradleAndBoot.error.CTPException;
 import com.example.gradleAndBoot.service.ProcessService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.UUID;
 
-import static com.example.gradleAndBoot.error.RestExceptionHandler.INVALID_JSON;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -64,8 +62,11 @@ public class TestingControllerIntegrationTest {
 		assertEquals(TEST_DESCRIPTION, resultBody.getDescription());
 	}
 
+  /**
+   * Test where we provide a valid RequestDTO.
+   */
   @Test
-  public void testEndpointWithPostPositiveScenario() throws Exception {
+  public void testEndpointWithPostPositiveScenario() {
     CreatedObject serviceResult = CreatedObject.builder().createdBy(INT_TEST).internalDescription(TEST_DESCRIPTION)
         .build();
     Request request = Request.builder().title(TITLE).forename(FORENAME).build();
@@ -83,22 +84,15 @@ public class TestingControllerIntegrationTest {
     assertEquals(TEST_DESCRIPTION, resultBody.getDescription());
   }
 
+  /**
+   * Test where we provide an invalid RequestDTO. See the empty forename.
+   */
   @Test
-  public void testEndpointWithPostNegativeScenario() throws Exception {
-    CreatedObject serviceResult = CreatedObject.builder().createdBy(INT_TEST).internalDescription(TEST_DESCRIPTION)
-        .build();
-    Request request = Request.builder().title(TITLE).forename(FORENAME).build();
-    given(this.processService.process(eq(request))).willReturn(serviceResult);
-
-    RequestDTO requestDTO = new RequestDTO(TITLE, null);
-    ResponseEntity<CTPException> result = this.restTemplate.postForEntity(
-        String.format("/testing/%s/request", CASE_ID), requestDTO, CTPException.class);
+  public void testEndpointWithPostNegativeScenario() {
+    RequestDTO requestDTO = new RequestDTO(TITLE, "");
+    ResponseEntity<CreatedObjectDTO> result = this.restTemplate.postForEntity(
+        String.format("/testing/%s/request", CASE_ID), requestDTO, CreatedObjectDTO.class);
     assertNotNull(result);
     assertTrue(result.getStatusCode().is4xxClientError());
-
-    CTPException resultBody = result.getBody();
-    assertNotNull(resultBody);
-    assertEquals(CTPException.Fault.VALIDATION_FAILED, resultBody.getFault());
-    assertEquals(INVALID_JSON, resultBody.getMessage());
   }
 }
