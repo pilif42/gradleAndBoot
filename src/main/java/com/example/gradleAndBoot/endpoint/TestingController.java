@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/testing", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/testing", produces = "application/json")
 public class TestingController {
 
   @Autowired
@@ -31,7 +31,7 @@ public class TestingController {
   @Autowired
   private MapperFacade mapperFacade;
 
-  @RequestMapping(value = "/{caseId}/request", method = RequestMethod.POST)
+  @RequestMapping(value = "/{caseId}/request", method = RequestMethod.POST, consumes = "application/json")
   public ResponseEntity<CreatedObjectDTO> testingPost(@PathVariable("caseId") final UUID caseId,
       @RequestBody @Valid final RequestDTO requestDTO,
       BindingResult bindingResult) throws InvalidRequestException {
@@ -47,5 +47,15 @@ public class TestingController {
     String newResourceUrl = ServletUriComponentsBuilder
         .fromCurrentRequest().buildAndExpand(caseId).toUri().toString();
     return ResponseEntity.created(URI.create(newResourceUrl)).body(mappedCreatedObject);
+  }
+
+  @RequestMapping(value = "/getme", method = RequestMethod.GET)
+  public ResponseEntity<CreatedObjectDTO> testingGet() {
+    log.debug("Entering testingGet ...");
+
+    CreatedObject createdObject = processService.process(null);
+    CreatedObjectDTO mappedCreatedObject = mapperFacade.map(createdObject, CreatedObjectDTO.class);
+
+    return ResponseEntity.ok(mappedCreatedObject);
   }
 }

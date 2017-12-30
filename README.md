@@ -13,6 +13,9 @@ To run:
 
 
 To test:
+    - curl -v -X GET http://localhost:8171/testing/getme
+    200 {"createdBy":"system","description":"some description"}
+
     - curl -v -d '{"title":"Mr", "forename":"Philippe"}' -H "Content-Type: application/json" -X POST http://localhost:8171/testing/a1678e52-2d26-4e4d-ac25-12cccb11929b/request
     201 {"createdBy":"system","description":"some description"}
 
