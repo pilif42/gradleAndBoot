@@ -21,4 +21,5 @@ To test:
 
 
 TODO: Add an integration test. (https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
+TODO: Dockerize the app
 TODO: Add CheckStyle
