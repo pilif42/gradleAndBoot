@@ -39,6 +39,7 @@ Notes taken while building a Docker image for this service:
     - to build the Docker image: ./gradlew clean build docker
     - to verify nothing is running yet: docker ps
     - to start a container with the built image:
-        - using the default Spring profile: docker run -p 8171:8171 -t com.example/gradle-and-boot
-        - using the prod Spring profile: docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8171:8171 -t com.example/gradle-and-boot
+        - using the default Spring profile: docker run -p 8171:8171 -t com.example/gradle-and-boot:latest
+        - using the prod Spring profile: docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8171:8171 -t com.example/gradle-and-boot:latest
+    - TODO tags '0.1.0-SNAPSHOT' not working?
     - TODO Publish this image to Docker Cloud.

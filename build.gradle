@@ -24,7 +24,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'com.palantir.docker'
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.0-SNAPSHOT'
 
 jar {
 	baseName = 'gradle-and-boot'
@@ -59,6 +59,8 @@ checkstyle {
 
 docker {
 	name "${project.group}/${jar.baseName}"
+	tags '0.1.0-SNAPSHOT'
+	dockerfile project.file('Dockerfile')
 	files jar.archivePath
 	buildArgs(['JAR_FILE': "${jar.archiveName}"])
 }
