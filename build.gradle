@@ -59,7 +59,7 @@ checkstyle {
 
 docker {
 	name "${project.group}/${jar.baseName}"
-	tags '0.1.0-SNAPSHOT'
+	tags "${project.version}"
 	dockerfile project.file('Dockerfile')
 	files jar.archivePath
 	buildArgs(['JAR_FILE': "${jar.archiveName}"])

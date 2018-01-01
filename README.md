@@ -36,16 +36,15 @@ Notes taken while building a Docker image for this service:
     - created Dockerfile at the project root.
     - added the Palantir plugin to build.gradle.
     - to verify currently available images: docker images | grep gradle-and-boot
-    - to build the Docker image: ./gradlew clean build docker
+    - to build the tagged Docker image: ./gradlew clean build dockerTag
     - to verify nothing is running yet: docker ps
     - to start a container with the built image:
-        - using the default Spring profile: docker run -p 8171:8171 -t brossierp/gradle-and-boot:latest
-        - using the prod Spring profile: docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8171:8171 -t brossierp/gradle-and-boot:latest
+        - using the default Spring profile: docker run -p 8171:8171 -t brossierp/gradle-and-boot:0.1.0-SNAPSHOT
+        - using the prod Spring profile: docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8171:8171 -t brossierp/gradle-and-boot:0.1.0-SNAPSHOT
     - to publish manually the Docker image to Docker Cloud:
         - docker login with brossierp
         - docker push brossierp/gradle-and-boot:latest
         - log into https://cloud.docker.com/ with brossierp
         - I can see my new image.
 
-    - TODO tags '0.1.0-SNAPSHOT' not working?
     - TODO Publish this image to Docker Cloud.
