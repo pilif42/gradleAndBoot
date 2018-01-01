@@ -4,9 +4,7 @@ Project started using https://start.spring.io/
 To verify the project vs CheckStyle rules:
     - ./gradlew clean check
     - Note that the CheckStyle rules are defined under /gradleAndBoot/config/checkstyle/checkstyle.xml.
-    - TODO: what about if I want to reference online CheckStyle rules at https://raw.githubusercontent.com/ONSdigital/rm-common-config/master/checkstyle/ons-checkstyle-config.xml
-            - check http://web.archive.org/web/20150322034610/http://www.gradleware.com/tutorials/feature-spotlight-enforcing-code-quality-standards/
-            - and https://github.com/gradle/gradle/issues/2663
+    - To instead use CheckStyle rules at a url, see /gradleAndBoot/config/checkstyle/notes.
 
 
 To build:

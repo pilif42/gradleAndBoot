@@ -1,0 +1,67 @@
+Rather than referencing CheckStyle rules stored inside the project, I may want to reference online CheckStyle rules. For instance, the ones at https://raw.githubusercontent.com/ONSdigital/rm-common-config/master/checkstyle/ons-checkstyle-config.xml
+To complete this task:
+    - either use https://github.com/gradle/gradle/pull/2760 if it has made to a Gradle release.
+    - or use the below which was taken from http://web.archive.org/web/20150322034610/http://www.gradleware.com/tutorials/feature-spotlight-enforcing-code-quality-standards/
+
+Feature Spotlight: Enforcing Code Quality Standards
+Tags: feature spotlight
+November 27, 2014
+In this month’s installment of the feature spotlight, core developer Peter Niederwieser discusses how to enforce the same code quality standards across all of your organization’s software projects.
+
+Enforcing Code Quality Standards Across Software Projects
+Many organizations use static analysis tools, such as Checkstyle, PMD, and FindBugs, to enforce code quality standards. Static analysis tools help catch preventable defects early in development. All of these tools use a configuration file to control which checks are performed against the codebase. Ideally, this configuration file would be shared across projects, and could be easily updated without having to touch each project.
+
+To achieve this goal, Gradle 2.2’s code quality plugins and tasks have been enhanced to support a new TextResource abstraction. A TextResource represents a read-only body of text that can be backed by a variety of sources such as an inline String, a local text file, or an artifact resolved from a Maven or Ivy repository.
+
+Sharing a Checkstyle Configuration File
+Let’s consider the example of sharing a Checkstyle configuration file across projects. This can be done in two simple steps:
+
+Package the configuration file as a Zip archive and publish it to your organization’s Maven or Ivy repository. For the following example, we are going to assume that the archive has been published to https://mavenrepo.mycompany.com with identifier mycompany.com:checkstyle-config:1.0.
+Add the following to your build scripts:
+
+apply plugin: "java"
+apply plugin: "checkstyle"
+
+repositories {
+    maven {
+        url "https://mavenrepo.mycompany.com"
+    }
+}
+
+configurations {
+    checkstyleConfig
+}
+
+dependencies {
+    checkstyleConfig "mycompany.com:checkstyle-config:+@zip"
+}
+
+checkstyle {
+    config = resources.text.fromArchiveEntry(
+        configurations.checkstyleConfig, "checkstyle-config.xml")
+}
+The build script declares a checkstyleConfig configuration and associates it with the latest version (+) of the checkstyle-config dependency. Because no pom.xml was published for checkstyle-config, the artifact extension needs to be specified explicitly (@zip). Finally, the checkstyle extension’s config property is set to the checkstyle-config.xml file contained within the checkstyle-config Zip archive. This is done using the resources.text.fromArchiveEntry() method, which accepts a configuration and an archive entry path, and returns a TextResource backed by that archive entry. (See TextResourceFactory for how to create text resources backed by other sources.)
+
+That’s it! Even better, updating Checkstyle configuration across all projects is now as easy as publishing a new version (say 2.0) of checkstyle-config to the Maven repository. (Note that by default, Gradle caches “latest version” information for 24 hours. This can be changed by setting ConfigurationStrategy#cacheDynamicVersionsFor.
+
+Sharing Multiple Configuration Files
+To spin this a bit further, let’s assume that different Checkstyle checks should be performed for production and test code. This can be achieved as follows:
+
+Add a second configuration file (say checkstyle-config-test.xml) to the checkstyle-config Zip archive, and publish a new version of the archive to the Maven repository.
+Replace the checkstyle {} block in build scripts with:
+
+checkstyleMain {
+    config = resources.text.fromArchiveEntry(
+        configurations.checkstyleConfig, "checkstyle-config.xml")
+}
+
+checkstyleTest {
+    config = resources.text.fromArchiveEntry(
+        configurations.checkstyleConfig, "checkstyle-config-test.xml")
+}
+Instead of configuring the checkstyle extension (which affects all Checkstyle tasks), the checkstyleMain and checkstyleTest tasks are now configured individually with their respective configuration files.
+
+Final Notes
+As of Gradle 2.2, TextResource is still incubating, and only supported by Gradle’s code quality plugins. Over time, it will be supported by a wider range of core plugins. Of course, TextResource can also be used in your own custom plugins and tasks.
+
+An alternative approach to measuring and enforcing code quality across an organization is to use the SonarQube code quality platform. In a future feature spotlight, we’ll take a look at how Gradle’s sonar-runner plugin makes integrating with SonarQube a breeze.

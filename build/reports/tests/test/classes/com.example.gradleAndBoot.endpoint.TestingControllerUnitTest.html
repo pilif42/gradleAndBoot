@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.326s</div>
+<div class="counter">0.322s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,17 +79,17 @@
 </thead>
 <tr>
 <td class="success">testingPostFailConstraintJson</td>
-<td>0.043s</td>
+<td>0.052s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testingPostGoodJson</td>
-<td>0.084s</td>
+<td>0.081s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testingPostRandomJson</td>
-<td>0.199s</td>
+<td>0.189s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -97,11 +97,11 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2017-12-30 21:36:43.332 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Looking for exception mappings: org.springframework.test.web.servlet.setup.StubWebApplicationContext@55ae57bc
-2017-12-30 21:36:43.358 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Resolving exception from handler [public org.springframework.http.ResponseEntity&lt;com.example.gradleAndBoot.domain.representation.CreatedObjectDTO&gt; com.example.gradleAndBoot.endpoint.TestingController.testingPost(java.util.UUID,com.example.gradleAndBoot.domain.representation.RequestDTO,org.springframework.validation.BindingResult) throws com.example.gradleAndBoot.error.InvalidRequestException]: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field &quot;description&quot; (class com.example.gradleAndBoot.domain.representation.RequestDTO), not marked as ignorable; nested exception is com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field &quot;description&quot; (class com.example.gradleAndBoot.domain.representation.RequestDTO), not marked as ignorable (2 known properties: &quot;title&quot;, &quot;forename&quot;])
+<pre>2018-01-01 12:03:33.944 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Looking for exception mappings: org.springframework.test.web.servlet.setup.StubWebApplicationContext@55ae57bc
+2018-01-01 12:03:33.965 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Resolving exception from handler [public org.springframework.http.ResponseEntity&lt;com.example.gradleAndBoot.domain.representation.CreatedObjectDTO&gt; com.example.gradleAndBoot.endpoint.TestingController.testingPost(java.util.UUID,com.example.gradleAndBoot.domain.representation.RequestDTO,org.springframework.validation.BindingResult) throws com.example.gradleAndBoot.error.InvalidRequestException]: org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field &quot;description&quot; (class com.example.gradleAndBoot.domain.representation.RequestDTO), not marked as ignorable; nested exception is com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field &quot;description&quot; (class com.example.gradleAndBoot.domain.representation.RequestDTO), not marked as ignorable (2 known properties: &quot;title&quot;, &quot;forename&quot;])
  at [Source: java.io.PushbackInputStream@e797588; line: 1, column: 57] (through reference chain: com.example.gradleAndBoot.domain.representation.RequestDTO[&quot;description&quot;])
-2017-12-30 21:36:43.369 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Invoking @ExceptionHandler method: public org.springframework.http.ResponseEntity&lt;?&gt; com.example.gradleAndBoot.error.RestExceptionHandler.handleHttpMessageNotReadableException(org.springframework.http.converter.HttpMessageNotReadableException,java.util.Locale)
-2017-12-30 21:36:43.373 ERROR 33676 --- [    Test worker] c.e.g.error.RestExceptionHandler         : handleHttpMessageNotReadableException {}
+2018-01-01 12:03:33.966 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Invoking @ExceptionHandler method: public org.springframework.http.ResponseEntity&lt;?&gt; com.example.gradleAndBoot.error.RestExceptionHandler.handleHttpMessageNotReadableException(org.springframework.http.converter.HttpMessageNotReadableException,java.util.Locale)
+2018-01-01 12:03:33.969 ERROR 22579 --- [    Test worker] c.e.g.error.RestExceptionHandler         : handleHttpMessageNotReadableException {}
 
 org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unrecognized field &quot;description&quot; (class com.example.gradleAndBoot.domain.representation.RequestDTO), not marked as ignorable; nested exception is com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field &quot;description&quot; (class com.example.gradleAndBoot.domain.representation.RequestDTO), not marked as ignorable (2 known properties: &quot;title&quot;, &quot;forename&quot;])
  at [Source: java.io.PushbackInputStream@e797588; line: 1, column: 57] (through reference chain: com.example.gradleAndBoot.domain.representation.RequestDTO[&quot;description&quot;])
@@ -192,11 +192,11 @@ Caused by: com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unr
 	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:235) ~[spring-web-4.3.13.RELEASE.jar:4.3.13.RELEASE]
 	... 70 common frames omitted
 
-2017-12-30 21:36:43.488 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Looking for exception mappings: org.springframework.test.web.servlet.setup.StubWebApplicationContext@26f80063
-2017-12-30 21:36:43.503 DEBUG 33676 --- [    Test worker] c.e.g.endpoint.TestingController         : Entering testingPost with caseId 7bc5d41b-0549-40b3-ba76-42f6d4cf3fd1 and requestDTO RequestDTO(title=Mr, forename=)
-2017-12-30 21:36:43.504 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Resolving exception from handler [public org.springframework.http.ResponseEntity&lt;com.example.gradleAndBoot.domain.representation.CreatedObjectDTO&gt; com.example.gradleAndBoot.endpoint.TestingController.testingPost(java.util.UUID,com.example.gradleAndBoot.domain.representation.RequestDTO,org.springframework.validation.BindingResult) throws com.example.gradleAndBoot.error.InvalidRequestException]: com.example.gradleAndBoot.error.InvalidRequestException: Binding errors for testingPost: 
-2017-12-30 21:36:43.504 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Invoking @ExceptionHandler method: public org.springframework.http.ResponseEntity&lt;?&gt; com.example.gradleAndBoot.error.RestExceptionHandler.handleInvalidRequestException(com.example.gradleAndBoot.error.InvalidRequestException,java.util.Locale)
-2017-12-30 21:36:43.506 ERROR 33676 --- [    Test worker] c.e.g.error.RestExceptionHandler         : handleInvalidRequestException {}
+2018-01-01 12:03:34.092 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Looking for exception mappings: org.springframework.test.web.servlet.setup.StubWebApplicationContext@26f80063
+2018-01-01 12:03:34.109 DEBUG 22579 --- [    Test worker] c.e.g.endpoint.TestingController         : Entering testingPost with caseId 7bc5d41b-0549-40b3-ba76-42f6d4cf3fd1 and requestDTO RequestDTO(title=Mr, forename=)
+2018-01-01 12:03:34.109 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Resolving exception from handler [public org.springframework.http.ResponseEntity&lt;com.example.gradleAndBoot.domain.representation.CreatedObjectDTO&gt; com.example.gradleAndBoot.endpoint.TestingController.testingPost(java.util.UUID,com.example.gradleAndBoot.domain.representation.RequestDTO,org.springframework.validation.BindingResult) throws com.example.gradleAndBoot.error.InvalidRequestException]: com.example.gradleAndBoot.error.InvalidRequestException: Binding errors for testingPost: 
+2018-01-01 12:03:34.110 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Invoking @ExceptionHandler method: public org.springframework.http.ResponseEntity&lt;?&gt; com.example.gradleAndBoot.error.RestExceptionHandler.handleInvalidRequestException(com.example.gradleAndBoot.error.InvalidRequestException,java.util.Locale)
+2018-01-01 12:03:34.112 ERROR 22579 --- [    Test worker] c.e.g.error.RestExceptionHandler         : handleInvalidRequestException {}
 
 com.example.gradleAndBoot.error.InvalidRequestException: Binding errors for testingPost: 
 	at com.example.gradleAndBoot.endpoint.TestingController.testingPost(TestingController.java:40) ~[main/:na]
@@ -270,9 +270,9 @@ com.example.gradleAndBoot.error.InvalidRequestException: Binding errors for test
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55) [gradle-base-services-4.4.1.jar:4.4.1]
 	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_121]
 
-2017-12-30 21:36:43.511 ERROR 33676 --- [    Test worker] c.e.g.error.RestExceptionHandler         : logMsg is 'Invalid Request ' - responseMsg is 'may not be empty'
-2017-12-30 21:36:43.547 DEBUG 33676 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Looking for exception mappings: org.springframework.test.web.servlet.setup.StubWebApplicationContext@81fb3f0
-2017-12-30 21:36:43.556 DEBUG 33676 --- [    Test worker] c.e.g.endpoint.TestingController         : Entering testingPost with caseId 7bc5d41b-0549-40b3-ba76-42f6d4cf3fd1 and requestDTO RequestDTO(title=Mr, forename=Philippe)
+2018-01-01 12:03:34.123 ERROR 22579 --- [    Test worker] c.e.g.error.RestExceptionHandler         : logMsg is 'Invalid Request ' - responseMsg is 'may not be empty'
+2018-01-01 12:03:34.159 DEBUG 22579 --- [    Test worker] c.e.g.u.MockMvcControllerAdviceHelper    : Looking for exception mappings: org.springframework.test.web.servlet.setup.StubWebApplicationContext@81fb3f0
+2018-01-01 12:03:34.170 DEBUG 22579 --- [    Test worker] c.e.g.endpoint.TestingController         : Entering testingPost with caseId 7bc5d41b-0549-40b3-ba76-42f6d4cf3fd1 and requestDTO RequestDTO(title=Mr, forename=Philippe)
 </pre>
 </span>
 </div>
@@ -284,7 +284,7 @@ com.example.gradleAndBoot.error.InvalidRequestException: Binding errors for test
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.4.1</a> at Dec 30, 2017 9:36:43 PM</p>
+<a href="http://www.gradle.org">Gradle 4.4.1</a> at Jan 1, 2018 12:03:34 PM</p>
 </div>
 </div>
 </body>
