@@ -15,7 +15,7 @@ To build:
 
 
 To run:
-	- java -jar build/libs/gradleAndBoot-0.1.0.jar
+	- java -jar build/libs/gradle-and-boot-0.1.0.jar
 
 
 To test:
@@ -32,4 +32,6 @@ To test:
      400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20171230210612001","message":"Provided json fails validation."}}
 
 
-TODO: Dockerize the app
+Notes taken while building a Docker Image for this service:
+    - created Dockerfile at the project root.
+    - added the palantir plugin to build.gradle.

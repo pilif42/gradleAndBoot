@@ -1,12 +1,18 @@
 buildscript {
 	ext {
 		springBootVersion = '1.5.9.RELEASE'
+		palantirVersion = '0.17.2'
 	}
 	repositories {
 		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"	// required for Palantir
+		}
 	}
+	// Note the " below are essential. With single quotes, springBootVersion and palantirVersion are not recognised.
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:${palantirVersion}")
 	}
 }
 
@@ -15,12 +21,13 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'checkstyle'
+//apply plugin: 'com.palantir.docker'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 jar {
-	baseName = 'gradleAndBoot'
+	baseName = 'gradle-and-boot'
 	version =  '0.1.0'
 }
 
@@ -49,3 +56,9 @@ dependencies {
 checkstyle {
 	toolVersion "7.6.1"
 }
+
+//docker {
+//	name "${project.group}/${jar.baseName}"
+//	files jar.archivePath
+//	buildArgs(['JAR_FILE': "${jar.archiveName}"])
+//}
