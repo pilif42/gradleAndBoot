@@ -52,6 +52,7 @@ tools/addend/target/classes/
 out/
 tools/addend/target/classes/
 
+build
 target
 *.log
 *.data
