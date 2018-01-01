@@ -35,6 +35,7 @@ To test:
 Notes taken while building a Docker image for this service:
     - created Dockerfile at the project root.
     - added the Palantir plugin to build.gradle.
+    - to verify currently available images: docker images | grep gradle-and-boot
     - to build the Docker image: ./gradlew clean build docker
     - to verify nothing is running yet: docker ps
     - to start a container with the built image:
