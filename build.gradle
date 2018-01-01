@@ -21,7 +21,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'checkstyle'
-//apply plugin: 'com.palantir.docker'
+apply plugin: 'com.palantir.docker'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -57,8 +57,8 @@ checkstyle {
 	toolVersion "7.6.1"
 }
 
-//docker {
-//	name "${project.group}/${jar.baseName}"
-//	files jar.archivePath
-//	buildArgs(['JAR_FILE': "${jar.archiveName}"])
-//}
+docker {
+	name "${project.group}/${jar.baseName}"
+	files jar.archivePath
+	buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}

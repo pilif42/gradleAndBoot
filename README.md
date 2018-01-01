@@ -32,6 +32,11 @@ To test:
      400 {"error":{"code":"VALIDATION_FAILED","timestamp":"20171230210612001","message":"Provided json fails validation."}}
 
 
-Notes taken while building a Docker Image for this service:
+Notes taken while building a Docker image for this service:
     - created Dockerfile at the project root.
-    - added the palantir plugin to build.gradle.
+    - added the Palantir plugin to build.gradle.
+    - to build the Docker image: ./gradlew clean build docker
+    - to verify nothing is running yet: docker ps
+    - to start a container with the built image:
+        - docker run -p 8171:8171 -t com.example/gradle-and-boot
+    - TODO Publish this image to Docker Cloud.
