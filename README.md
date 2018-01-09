@@ -51,8 +51,11 @@ Notes taken while building a Docker image for this service:
             - docker login with brossierp
             -./gradlew clean build dockerTag dockerPush
             - docker logout
+            - TODO: instead of the 'docker login' above, it would be nice if the Palantir plugin could pull credentials from a props file
+            TODO and use them to log into Docker Cloud. But, this is not possible at the moment. See https://github.com/palantir/gradle-docker/issues/74
         - you will see in the console output:
             Task :dockerPush
             The push refers to a repository [docker.io/brossierp/gradle-and-boot]
         - log into https://cloud.docker.com/ with brossierp
         - click on Repositories and verify a new entry appears for brossierp/gradle-and-boot
+
