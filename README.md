@@ -46,5 +46,13 @@ Notes taken while building a Docker image for this service:
         - docker push brossierp/gradle-and-boot:latest
         - log into https://cloud.docker.com/ with brossierp
         - I can see my new image.
-
-    - TODO Publish this image to Docker Cloud.
+    - to publish automatically this image to Docker Cloud:
+        - commands are:
+            - docker login with brossierp
+            -./gradlew clean build dockerTag dockerPush
+            - docker logout
+        - you will see in the console output:
+            Task :dockerPush
+            The push refers to a repository [docker.io/brossierp/gradle-and-boot]
+        - log into https://cloud.docker.com/ with brossierp
+        - click on Repositories and verify a new entry appears for brossierp/gradle-and-boot
