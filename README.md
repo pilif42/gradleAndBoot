@@ -1,7 +1,7 @@
 Project started using https://start.spring.io/
 
 
-To verify the project vs CheckStyle rules:
+To verify the project versus CheckStyle rules:
     - ./gradlew clean check
     - Note that the CheckStyle rules are defined under /gradleAndBoot/config/checkstyle/checkstyle.xml.
     - To instead use CheckStyle rules at a url, see /gradleAndBoot/config/checkstyle/notes.
